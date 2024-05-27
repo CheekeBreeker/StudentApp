@@ -1,0 +1,16 @@
+﻿@model GroupDto
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-left">
+    <h2 class="display-6">Редактирование группы</h2>
+
+    <form action="/Group/Edit/@Model.Id" method="post">
+        <div class="mb-3">
+            <label class="form-label">Название группы</label>
+            <input type="text" name="name" value="@Model.Name" class="form-control" />
+        </div>
+        <button type="submit" class="btn btn-primary">Сохранить</button>
+    </form> 
+</div>

@@ -1,0 +1,40 @@
+﻿@model List<GroupDto>
+@{
+    var title = "Добавление студента";
+    ViewData["Title"] = title;
+}
+
+<div class="text-left">
+    <h1 class="display-6">@title</h1>
+    <form action="/Student/Add/" method="post">
+        <div class="mb-3">
+            <label class="form-label">Группа</label>
+            <select name="student.groupId" class="form-control">
+                <option value="">-</option>
+                @foreach(var group in Model)
+                {
+                    <option value="@group.Id">@group.Name</option>
+                }
+            </select>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Фамилия</label>
+            <input type="text" name="student.lastName" class="form-control" />
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Имя</label>
+            <input type="text" name="student.firstName" class="form-control" />
+        </div>
+        <div class="mb-3">
+            <label class="form-label">E-mail</label>
+            <input type="text" name="student.email" class="form-control" />
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Пароль</label>
+            <input type="password" name="student.password" class="form-control" />
+        </div>
+
+        <button type="submit" class="btn btn-primary">Сохранить</button>
+    </form>
+   
+</div>

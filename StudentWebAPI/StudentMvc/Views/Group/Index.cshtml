@@ -1,0 +1,41 @@
+﻿@model GroupViewModel
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-left">
+    <h1 class="display-4">Список групп</h1>
+    <a href="/Group/Add/" class="btn btn-primary">Добавить группу</a>
+
+    <form action="/Group/" method="post" class="row row-cols-lg-auto g-3 my-2 align-items-center">
+        <div class="col-12">
+            <label>Название группы</label>
+        </div>
+        <div class="col-12">
+            <input type="text" name="name" value="@Model.Filter.Name" class="form-control" />
+        </div>
+        <div class="col-12">
+            <button type="submit" class="btn btn-primary">Найти</button>
+        </div>
+    </form>
+
+    <table class="table">
+        <tr>
+            <th>Id</th>
+            <th>Название</th>
+            <th>Действия</th>
+        </tr>
+        @foreach(var group in Model.Groups)
+        {
+            <tr>
+                <td>@group.Id</td>
+                <td>@group.Name</td>
+                <td>
+                    <a href="/Group/Edit/@group.Id">Редактировать</a>
+                    <a href="/Group/Delete/@group.Id">Удалить</a>
+                </td>
+            </tr>
+        }
+    </table>
+   
+</div>

@@ -1,0 +1,41 @@
+﻿@using StudentWebAPI.Models;
+@model StudentEditViewModel
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-left">
+    <h1 class="display-6">Редактирование студента</h1>
+    <form action="/Student/Edit/" method="post">
+        <input type="hidden" name="student.id" value="@Model?.Student?.Id" />
+        <div class="mb-3">
+            <label class="form-label">Группа</label>
+            <select name="student.groupId" class="form-control">
+                <option value="">-</option>
+                @foreach (var group in Model.Groups ?? new List<GroupDto>())
+                {
+                    <option value="@group.Id" selected="@(Model.Student?.GroupId == group.Id)">@group.Name</option>
+                }
+            </select>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Фамилия</label>
+            <input type="text" name="student.lastName" value="@Model?.Student?.LastName" class="form-control" />
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Имя</label>
+            <input type="text" name="student.firstName" value="@Model?.Student?.FirstName" class="form-control" />
+        </div>
+        <div class="mb-3">
+            <label class="form-label">E-mail</label>
+            <input type="text" name="student.email" value="@Model?.Student?.Email" class="form-control" />
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Пароль</label>
+            <input type="password" name="student.password" value="@Model?.Student?.Password" class="form-control" />
+        </div>
+
+        <button type="submit" class="btn btn-primary">Сохранить</button>
+    </form>
+   
+</div>
