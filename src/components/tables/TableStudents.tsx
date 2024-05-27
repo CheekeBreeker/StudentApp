@@ -1,11 +1,10 @@
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import { Popconfirm, Space, Table, message } from "antd";
-import { request, history } from "@umijs/max";
+import { request, history, useModel } from "@umijs/max";
 import dayjs from 'dayjs';
 
 export default function() {
-
-    
+  const {data, loading, fillData} = useModel("useStudentModel")
     const date_format = (value: string | null) => {
         if(!value) return "";
         const date = dayjs(value);
@@ -20,11 +19,10 @@ export default function() {
         message.success("Студент удален")
         const newStudents = data?.students.filter((x : any) => x.id != id)
         const newData = {...data, students: newStudents}
-        setData(newData)
+        fillData(newData)
         }).catch(error => {
         message.error("Ошибка при удалении студента");
         console.log(error);
-        setIsModalOpen(false)
         });
     }
 
@@ -84,9 +82,12 @@ export default function() {
       }]
 
     return(
-        <Table 
-        rowKey={"id"}
-        columns={ columns } 
-        dataSource={data?.students} />
+      <>
+        {<Table 
+          rowKey={"id"}
+          loading = {loading}
+          columns={ columns } 
+          dataSource={ loading ? [] : data?.students } />}
+      </>
     );
   }
